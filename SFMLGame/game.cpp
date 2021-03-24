@@ -49,7 +49,7 @@ void Game::InitEnemy(){
 
 	this->enemyCircle.setRadius(2 * this->enemy.GetSize());
 	this->enemyCircle.setOrigin(sf::Vector2f(size, size));
-	this->enemyCircle .setFillColor(sf::Color::Red);
+	this->enemyCircle.setFillColor(sf::Color::Red);
 	this->enemyCircle.setOutlineColor(sf::Color::White);
 	this->enemyCircle.setOutlineThickness(1.0f);
 
@@ -61,16 +61,18 @@ void Game::InitEnemy(){
 
 void Game::InitText(){
 
-	
+	//Load Font
 	if (!this->font.loadFromFile("coolvetica.ttf")){
 		throw "Font not Found";
 	}
 	else {
-		this->text.setFont(this->font);
-		this->text.setString("you lose");
-		this->text.setCharacterSize(24);
-		this->text.setFillColor(sf::Color::Red);
-		this->text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+		this->loseText.setFont(this->font);
+		this->loseText.setString("you lose");
+		this->loseText.setCharacterSize(36);
+		this->loseText.setOrigin(sf::Vector2f(this->loseText.getLocalBounds().width / 2, this->loseText.getLocalBounds().height / 2));
+		this->loseText.setPosition(sf::Vector2f(this->videoMode.width / 2, this->videoMode.height / 2));
+		this->loseText.setFillColor(sf::Color::Red);
+		this->loseText.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	}
 }
 
@@ -79,12 +81,9 @@ void Game::GameLost(){
 	this->window->setMouseCursorVisible(true);
 }
 
-bool Game::DetectCollision(sf::Shape* objectOne, sf::Shape* objectTwo){
-	if (objectOne->getGlobalBounds().intersects(objectTwo->getGlobalBounds())) 
-		return true;
-	else return false;
+bool Game::DetectCollision(sf::Shape* objectOne, sf::Shape* objectTwo) {
+	return objectOne->getGlobalBounds().intersects(objectTwo->getGlobalBounds());
 }
-
 Game::Game(){
 	
 	this->InitVariables();
@@ -178,7 +177,7 @@ void Game::Render(){
 
 	}
 	else {
-		this->window->draw(this->text);
+		this->window->draw(this->loseText);
 	}
 
 	this->window->display();

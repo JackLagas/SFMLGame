@@ -27,7 +27,7 @@ private:
 	float FRAMERATE;
 	Enemy enemy;
 	std::string gameStatus;
-	sf::Text text;
+	sf::Text loseText;
 	sf::Font font;
 
 
