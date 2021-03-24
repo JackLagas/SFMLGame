@@ -30,7 +30,7 @@ public:
 	//Constructor / Destructor
 
 	Enemy();
-	Enemy(float _attackDamage, float _health, float _size, sf::Vector2f _position, float _speed);
+
 
 
 

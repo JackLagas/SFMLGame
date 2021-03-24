@@ -21,13 +21,6 @@ float Enemy::invSqrt(float number){
 Enemy::Enemy(){
 }
 
-Enemy::Enemy(float _attackDamage, float _health, float _size, sf::Vector2f _position, float _speed) {
-	this->attackDamage = _attackDamage;
-	this->health = _health;
-	this->size = _size;
-	this->position = _position;
-	this->speed = _speed;
-}
 
 void Enemy::SetAttackDamage(float _attackDamage){
 	this->attackDamage = _attackDamage;

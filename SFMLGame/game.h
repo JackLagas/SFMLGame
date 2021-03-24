@@ -18,7 +18,6 @@ private:
 
 
 	//Variables
-
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event ev;
@@ -44,7 +43,7 @@ private:
 	void InitText();
 
 	void GameLost();
-	bool DetectCollision(sf::CircleShape* objectOne, sf::CircleShape* objectTwo);
+	bool DetectCollision(sf::Shape* objectOne, sf::Shape* objectTwo);
 
 public:
 

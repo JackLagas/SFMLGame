@@ -65,25 +65,13 @@ void Game::InitText(){
 	if (!this->font.loadFromFile("coolvetica.ttf")){
 		throw "Font not Found";
 	}
-	
-
-	this->text.setFont(this->font); 
-
-	
-	this->text.setString("you lose");
-
-	
-	this->text.setCharacterSize(24); 
-
-
-	this->text.setFillColor(sf::Color::Red);
-
-
-	this->text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-
-	
-		
+	else {
+		this->text.setFont(this->font);
+		this->text.setString("you lose");
+		this->text.setCharacterSize(24);
+		this->text.setFillColor(sf::Color::Red);
+		this->text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	}
 }
 
 void Game::GameLost(){
@@ -91,20 +79,10 @@ void Game::GameLost(){
 	this->window->setMouseCursorVisible(true);
 }
 
-bool Game::DetectCollision(sf::CircleShape* objectOne, sf::CircleShape* objectTwo){
-	
-	sf::Vector2f positionOne = objectOne->getPosition();
-	sf::Vector2f positionTwo = objectTwo->getPosition();
-
-	double distance = std::sqrt((positionOne.x - positionTwo.x) * (positionOne.x - positionTwo.x) + (positionOne.y - positionTwo.y) * (positionOne.y - positionTwo.y));
-
-	if (distance <= objectOne->getRadius() + objectTwo->getRadius()) {
+bool Game::DetectCollision(sf::Shape* objectOne, sf::Shape* objectTwo){
+	if (objectOne->getGlobalBounds().intersects(objectTwo->getGlobalBounds())) 
 		return true;
-	}
-	else {
-		return false;
-	}
-
+	else return false;
 }
 
 Game::Game(){
@@ -185,7 +163,7 @@ void Game::Update(){
 		this->enemyCircle.setPosition(this->enemy.GetPosition());
 
 		if (this->DetectCollision(&enemyCircle, &player)) {
-			this->gameStatus = "lost";
+			this->GameLost();
 		}
 	}
 
